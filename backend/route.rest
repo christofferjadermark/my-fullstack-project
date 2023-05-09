@@ -1,0 +1,21 @@
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/users/645a771ae85d24fa346dc665
+
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Hello",
+    "email": "christoffer.jadermark@gmail.com",
+    "password": "123456"
+}
+
+###
+
+DELETE http://localhost:3000/users/645a771ae85d24fa346dc665
