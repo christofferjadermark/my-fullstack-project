@@ -11,14 +11,14 @@ function Register() {
     password: "",
   });
   const setField = (field, value) => {
-    setData({ [field]: value });
+    setData({ ...data, [field]: value });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(data);
 
-    fetch("http://localhost:3000/api/users/register", {
+    fetch("http://localhost:8080/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ function Register() {
     }).then((response) => {
       console.log(response);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("User created successfully");
       } else {
         alert("Error creating user");
@@ -42,7 +42,7 @@ function Register() {
         <Form.Control
           type="text"
           value={data.name}
-          onChange={(e) => setField("formBasicEmail", e.target.value)}
+          onChange={(e) => setField("name", e.target.value)}
           placeholder="Enter username"
         />
       </Form.Group>
@@ -51,7 +51,7 @@ function Register() {
         <Form.Control
           type="email"
           value={data.email}
-          onChange={(e) => setField("formBasicEmail", e.target.value)}
+          onChange={(e) => setField("email", e.target.value)}
           placeholder="Enter email"
         />
       </Form.Group>
@@ -60,7 +60,7 @@ function Register() {
         <Form.Control
           type="password"
           value={data.password}
-          onChange={(e) => setField("formBasicPassword", e.target.value)}
+          onChange={(e) => setField("password", e.target.value)}
           placeholder="Password"
         />
         <Form.Text>

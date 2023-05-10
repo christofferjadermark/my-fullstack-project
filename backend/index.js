@@ -1,20 +1,23 @@
 "use strict";
 // require("dotenv").config();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 // // const express = require("express");
 // // const app = express();
 // // const mongoose = require("mongoose");
 // // const cors = require("cors");
-// import express from "express";
-// import mongoose from "mongoose";
-// import cors from "cors";
-// const app = express();
-// mongoose.connect("mongodb://127.0.0.1:27017/fullstackdb", {
-//   useNewUrlParser: true,
-// });
-// const db = mongoose.connection;
-// db.on("error", (error: any) => console.log(error));
-// db.once("open", () => console.log("Connected to database"));
-// app.use(express.json());
-// const usersRouter = require("./routes/users/users.js");
-// app.use("/users", usersRouter);
-// app.listen(8080, () => console.log("Server running on port 8080"));
+const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
+const app = (0, express_1.default)();
+mongoose_1.default.connect("mongodb://127.0.0.1:27017/fullstackdb", {});
+const db = mongoose_1.default.connection;
+db.on("error", (error) => console.log(error));
+db.once("open", () => console.log("Connected to database"));
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+const usersRouter = require("./routes/users/users.js");
+app.use("/users", usersRouter);
+app.listen(8080, () => console.log("Server running on port 8080"));

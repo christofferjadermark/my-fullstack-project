@@ -12,6 +12,7 @@ import Profile from "./routes/Profile.jsx";
 import Register from "./routes/Register.jsx";
 
 function Root() {
+  console.log(Link)
   return (
     <>
       <section className="tabs">
@@ -22,10 +23,10 @@ function Root() {
           <Link to="/profile" className="tab" href="profile">
             Profile
           </Link>
-          <Link Link to="/contact" className="tab" href="contact">
+          <Link to="/contact" className="tab" href="contact">
             Contact
           </Link>
-          <Link Link to="/login" className="tab" href="login">
+          <Link to="/login" className="tab" href="login">
             Login/Sign Up
           </Link>
         </div>
