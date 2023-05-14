@@ -1,9 +1,10 @@
-function Profile() {
-    return (
-        <div>
-            <h1>Profile</h1>
-        </div>
-    )
+function Profile(props) {
+  return (
+    <>
+      <h1>User</h1>
+      <div>Biography</div>
+    </>
+  );
 }
 
-export default Profile
+export default Profile;

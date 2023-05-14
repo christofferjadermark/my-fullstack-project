@@ -1,13 +1,13 @@
-GET http://localhost:3000/users
+GET http://localhost:8080/users
 
 ###
 
-GET http://localhost:3000/users/645a771ae85d24fa346dc665
+GET http://localhost:8080/users/645a771ae85d24fa346dc665
 
 
 ###
 
-POST http://localhost:3000/users
+POST http://localhost:8080/users
 Content-Type: application/json
 
 {
@@ -18,4 +18,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/users/645a771ae85d24fa346dc665
+DELETE http://localhost:8080/users/645ce7b1ec4b1cb0255e0d2a

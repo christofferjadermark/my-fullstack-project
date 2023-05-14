@@ -10,9 +10,27 @@ import Login from "./routes/Login.jsx";
 import Contact from "./routes/Contact.jsx";
 import Profile from "./routes/Profile.jsx";
 import Register from "./routes/Register.jsx";
+import React, { useState } from "react";
 
 function Root() {
-  console.log(Link)
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  console.log(isLoggedIn);
+
+  const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
+  const [menu_class, setMenuClass] = useState("menu hidden");
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+  const updateMenu = () => {
+    if (!isMenuClicked) {
+      setBurgerClass("burger-bar clicked");
+      setMenuClass("menu visible");
+    } else {
+      setBurgerClass("burger-bar unclicked");
+      setMenuClass("menu hidden");
+    }
+    setIsMenuClicked(!isMenuClicked);
+  };
+
   return (
     <>
       <section className="tabs">
@@ -26,9 +44,21 @@ function Root() {
           <Link to="/contact" className="tab" href="contact">
             Contact
           </Link>
-          <Link to="/login" className="tab" href="login">
-            Login/Sign Up
-          </Link>
+          {isLoggedIn ? (
+            <div
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+              className="tab"
+            >
+              Logout
+            </div>
+          ) : (
+            <Link to="/login" className="tab" href="login">
+              Login/Sign Up
+            </Link>
+          )}
         </div>
       </section>
       <Outlet />
