@@ -32,6 +32,7 @@ function Login() {
         setPassword(response.data.password);
         setLogin(true);
         localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("email", email);
         navigate("/");
         window.location.reload();
       })

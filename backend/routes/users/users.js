@@ -21,22 +21,27 @@ const User = require("../../models/usermodels.js");
 const getNewToken = require("../../models/getNewToken.js");
 const bcrypt = require("bcryptjs");
 module.exports = router;
-// Get all
-router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+/* // Get all
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}); */
+// Get one
+router.get("/:email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield User.find();
-        res.json(users);
+        const email = req.params.email;
+        const user = yield User.find({ email: email });
+        res.json(user);
     }
-    catch (err) {
-        res.status(500).json({ message: err.message });
+    catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }));
-// Get one
-router.get("/:id", getUser, (req, res) => {
-    const userId = req.params.id;
-    const user = User.findById(userId);
-    res.json(user);
-});
+module.exports = router;
 // Register user
 router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = new User({
@@ -152,7 +157,6 @@ function loginUser(credentials) {
 }
 function getUser(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        let user;
         try {
             user = yield User.findById(req.params.id);
             if (user == null || user == undefined) {

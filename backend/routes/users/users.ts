@@ -2,6 +2,7 @@
 // const router = express.Router();
 // const bcrypt = require("bcryptjs");
 
+import { log } from "console";
 import express, { NextFunction } from "express";
 const router = express.Router();
 const User = require("../../models/usermodels.js");
@@ -9,7 +10,7 @@ const getNewToken = require("../../models/getNewToken.js");
 const bcrypt = require("bcryptjs");
 module.exports = router;
 
-// Get all
+/* // Get all
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
@@ -17,14 +18,21 @@ router.get("/", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+}); */
 
 // Get one
-router.get("/:id", getUser, (req, res) => {
-  const userId = req.params.id;
-  const user = User.findById(userId);
-  res.json(user);
+router.get("/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const user = await User.find({ email: email });
+    res.json(user);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
+
+module.exports = router;
 
 // Register user
 router.post("/register", async (req, res) => {
@@ -114,6 +122,8 @@ router.delete("/:id", getUser, async (req, res) => {
 async function loginUser(credentials: { email: string; password: string }) {
   try {
     const user = await User.findOne({ email: credentials.email });
+
+
     if (!user) {
       return { error: "Invalid credentials1" };
     }
@@ -137,7 +147,7 @@ async function loginUser(credentials: { email: string; password: string }) {
 }
 
 async function getUser(req: Request, res: Response, next: NextFunction) {
-  let user: User | null;
+
   try {
     user = await User.findById(req.params.id);
     if (user == null || user == undefined) {
