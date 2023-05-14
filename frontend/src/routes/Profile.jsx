@@ -20,7 +20,7 @@ useEffect(() => {
     console.log(error);
   });
 
-}, []);
+}, [email]);
 
 
 

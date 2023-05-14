@@ -12,7 +12,7 @@ const useFetchUser = (email: any) => {
     .then((response) => {
         setUser(response.data);
       })
-  }, []);
+  }, [email]);
 
   return { user };
 };

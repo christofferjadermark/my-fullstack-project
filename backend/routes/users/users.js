@@ -101,32 +101,30 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({ error: "Something went wrong" });
     }
 }));
-// Update one
-router.patch("/:id", getUser, (req, res) => {
-    if (req.body.name != null) {
-        res.user.name = req.body.name;
-    }
-    if (req.body.email != null) {
-        res.user.email = req.body.email;
-    }
-    try {
-        const updatedUser = res.user.save();
-        res.json(updatedUser);
-    }
-    catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-// Delete one
-router.delete("/:id", getUser, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield res.user.deleteOne();
-        res.json({ message: "Deleted User" });
-    }
-    catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-}));
+// // Update one
+// router.patch("/:id", getUser, (req, res) => {
+//   if (req.body.name != null) {
+//     res.user.name = req.body.name;
+//   }
+//   if (req.body.email != null) {
+//     res.user.email = req.body.email;
+//   }
+//   try {
+//     const updatedUser = res.user.save();
+//     res.json(updatedUser);
+//   } catch (err) {
+//     res.status(400).json({ message: err.message });
+//   }
+// });
+// // Delete one
+// router.delete("/:id", getUser, async (req, res) => {
+//   try {
+//     await res.user.deleteOne();
+//     res.json({ message: "Deleted User" });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 function loginUser(credentials) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -155,20 +153,17 @@ function loginUser(credentials) {
         }
     });
 }
-function getUser(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            user = yield User.findById(req.params.id);
-            if (user == null || user == undefined) {
-                res.status(404).json({ message: "Cannot find user" });
-                return;
-            }
-        }
-        catch (_a) {
-            res.status(500).json({ message: err.message });
-            return;
-        }
-        res.locals.user = user;
-        return next();
-    });
-}
+// async function getUser(req: Request, res: Response, next: NextFunction) {
+//   try {
+//     user = await User.findById(req.params.id);
+//     if (user == null || user == undefined) {
+//       res.status(404).json({ message: "Cannot find user" });
+//       return;
+//     }
+//   } catch {
+//     res.status(500).json({ message: err.message });
+//     return;
+//   }
+//   res.locals.user = user;
+//   return next();
+// }

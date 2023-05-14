@@ -27,7 +27,7 @@ router.get("/:email", async (req, res) => {
     const user = await User.find({ email: email });
     res.json(user);
 
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 });
@@ -93,31 +93,31 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Update one
-router.patch("/:id", getUser, (req, res) => {
-  if (req.body.name != null) {
-    res.user.name = req.body.name;
-  }
-  if (req.body.email != null) {
-    res.user.email = req.body.email;
-  }
-  try {
-    const updatedUser = res.user.save();
-    res.json(updatedUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
+// // Update one
+// router.patch("/:id", getUser, (req, res) => {
+//   if (req.body.name != null) {
+//     res.user.name = req.body.name;
+//   }
+//   if (req.body.email != null) {
+//     res.user.email = req.body.email;
+//   }
+//   try {
+//     const updatedUser = res.user.save();
+//     res.json(updatedUser);
+//   } catch (err) {
+//     res.status(400).json({ message: err.message });
+//   }
+// });
 
-// Delete one
-router.delete("/:id", getUser, async (req, res) => {
-  try {
-    await res.user.deleteOne();
-    res.json({ message: "Deleted User" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+// // Delete one
+// router.delete("/:id", getUser, async (req, res) => {
+//   try {
+//     await res.user.deleteOne();
+//     res.json({ message: "Deleted User" });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 
 async function loginUser(credentials: { email: string; password: string }) {
   try {
@@ -146,18 +146,18 @@ async function loginUser(credentials: { email: string; password: string }) {
   }
 }
 
-async function getUser(req: Request, res: Response, next: NextFunction) {
+// async function getUser(req: Request, res: Response, next: NextFunction) {
 
-  try {
-    user = await User.findById(req.params.id);
-    if (user == null || user == undefined) {
-      res.status(404).json({ message: "Cannot find user" });
-      return;
-    }
-  } catch {
-    res.status(500).json({ message: err.message });
-    return;
-  }
-  res.locals.user = user;
-  return next();
-}
+//   try {
+//     user = await User.findById(req.params.id);
+//     if (user == null || user == undefined) {
+//       res.status(404).json({ message: "Cannot find user" });
+//       return;
+//     }
+//   } catch {
+//     res.status(500).json({ message: err.message });
+//     return;
+//   }
+//   res.locals.user = user;
+//   return next();
+// }
